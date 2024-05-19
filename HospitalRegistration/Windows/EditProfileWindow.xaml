@@ -1,0 +1,184 @@
+﻿<Window x:Class="HospitalRegistration.Windows.EditProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HospitalRegistration.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Изменение данных профиля"
+        WindowStyle="None"
+        Height="700" Width="600"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border
+        x:Name="MainBorder"
+        MouseDown="MainBorder_MouseDown"
+        CornerRadius="10">
+
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#2f41cc" Offset="0.1"/>
+                <GradientStop Color="#4959cc" Offset="0.3"/>
+                <GradientStop Color="#505dbf" Offset="0.9"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+            <Border
+            Background="White"
+            Width="500"
+            Height="600"
+            CornerRadius="10">
+
+                <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+                    <TextBlock FontSize="18">
+            Email:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbEmail"
+                MaxLength="64"
+                Margin="5">
+
+                    </TextBox>
+
+                    <TextBlock FontSize="18">
+            Имя:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbFirstName"
+                MaxLength="64"
+                Margin="5">
+
+                    </TextBox>
+
+                    <TextBlock FontSize="18">
+            Фамилия:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbLastName"
+                MaxLength="64"
+                Margin="5">
+
+                    </TextBox>
+
+                    <TextBlock FontSize="18">
+            *Отчество:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbMiddleName"
+                MaxLength="64"
+                Margin="5">
+
+                    </TextBox>
+
+                    <TextBlock FontSize="18">
+            Телефон:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbPhone"
+                MaxLength="20"
+                Margin="5">
+
+                    </TextBox>
+
+                    <TextBlock FontSize="18">
+            Номер полиса:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbInsurance"
+                MaxLength="16"
+                Margin="5"
+                KeyDown="TbInsurance_KeyDown">
+
+                    </TextBox>
+
+                    <StackPanel
+                Orientation="Horizontal"
+                Margin="10"
+                HorizontalAlignment="Center">
+
+                        <TextBlock FontSize="18"
+                    VerticalAlignment="Center">
+                Пол:
+                        </TextBlock>
+
+                        <ComboBox
+                    x:Name="CbGender"
+                        Style="{StaticResource mainCombobox}"
+                    Margin="5">
+                            <ComboBoxItem>
+                                М
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                Ж
+                            </ComboBoxItem>
+                        </ComboBox>
+
+                    </StackPanel>
+
+                    <StackPanel
+                Orientation="Horizontal"
+                Margin="10"
+                HorizontalAlignment="Center">
+
+                        <TextBlock FontSize="18"
+                    VerticalAlignment="Center">
+                Дата рождения:
+                        </TextBlock>
+
+                        <TextBox Style="{StaticResource mainTextbox}"
+                                    Width="100" MaxLength="11"
+                                 FontSize="18"
+                                 x:Name="TbBirthday">
+                            12.12.2000
+                        </TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel
+                Orientation="Horizontal"
+                Margin="10">
+
+                        <Button
+                    Style="{StaticResource mainButton}"
+                    x:Name="BtnSaveChanges"
+                    Content="Сохранить" FontSize="16"
+                    Margin="2" Click="BtnSaveChanges_Click">
+
+                        </Button>
+
+                        <Button
+                    Style="{StaticResource mainButton}"
+                    x:Name="BtnGoBack"
+                    Content="Назад" FontSize="16"
+                    Margin="2" Click="BtnGoBack_Click">
+
+                        </Button>
+
+                    </StackPanel>
+
+
+                </StackPanel>
+
+            </Border>
+            
+        </Grid>
+
+    </Border>
+
+</Window>

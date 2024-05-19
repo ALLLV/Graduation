@@ -1,0 +1,109 @@
+﻿<Window x:Class="HospitalRegistration.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HospitalRegistration"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="Авторизация" Height="500" Width="700"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border
+        x:Name="MainBorder"
+        MouseDown="MainBorder_MouseDown"
+        CornerRadius="10">
+
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#2f41cc" Offset="0.1"/>
+                <GradientStop Color="#4959cc" Offset="0.3"/>
+                <GradientStop Color="#505dbf" Offset="0.9"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Border
+            Background="White"
+            Width="300"
+            Height="360"
+            CornerRadius="10">
+
+            <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+                <TextBlock FontSize="18">
+            Введите логин:
+                </TextBlock>
+
+                <TextBox
+                Style="{StaticResource mainTextbox}"
+                x:Name="TbLogin"
+                MaxLength="64"
+                Margin="10">
+                
+                </TextBox>
+
+                <TextBlock FontSize="18">
+            Введите пароль:
+                </TextBlock>
+
+                <Grid Width="260">
+                    <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                        <PasswordBox
+                                 Style="{StaticResource mainPasswordbox}"
+                    
+                                 x:Name="PbPassword"
+                                 MaxLength="64">
+                        </PasswordBox>
+
+
+                    </StackPanel>
+
+                    <TextBox
+                            Style="{StaticResource mainTextbox}"
+                            x:Name="TbPassword"
+                            MaxLength="64"
+                            Margin="5"
+                            Visibility="Hidden">
+
+                    </TextBox>
+
+                    <Button Style="{StaticResource eyeButton}"
+                                x:Name="BtnEye"
+                                Click="BtnEye_Click"
+                                HorizontalAlignment="Right">
+                        <Image Source="\Media\visibility_off.png" 
+                                   x:Name="ImgEye">
+                        </Image>
+                    </Button>
+                </Grid>
+
+                <Button
+                x:Name="BtnLogin"
+                Style="{StaticResource mainButton}"
+                Click="BtnLogin_Click" FontSize="16">
+                    Войти
+                </Button>
+
+                <Button
+                x:Name="BtnRegistration"
+                Style="{StaticResource mainButton}"
+                Click="BtnRegistration_Click" FontSize="16">
+                    Регистрация
+                </Button>
+
+                <Button
+                x:Name="BtnExit"
+                Style="{StaticResource mainButton}"
+                Click="BtnExit_Click" FontSize="16">
+                    Выйти
+                </Button>
+            </StackPanel>
+
+        </Border>
+        
+
+    </Border>
+</Window>
