@@ -29,5 +29,16 @@ namespace HospitalRegistration.Helpers
         }
 
         public Entities DbContext { get { return dbContext; } }
+
+        public static void InitializeConnection() 
+        { 
+            if (instance == null)
+            {
+                instance = new DbConnectionHelper();
+                dbContext = new Entities();
+
+                instance.DbContext.Database.Connection.Open();
+            }
+        }
     }
 }

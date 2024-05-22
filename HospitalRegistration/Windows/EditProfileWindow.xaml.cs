@@ -28,7 +28,7 @@ namespace HospitalRegistration.Windows
             TbPhone.Text = currentUser.phone;
             TbInsurance.Text = currentUser.insuranceNumber;
             CbGender.SelectedIndex = currentUser.idGender == 1 ? 0 : 1;
-            TbBirthday.Text = currentUser.birthday.ToString("dd.mm.yyyy");
+            TbBirthday.Text = currentUser.birthday.ToString("d");
         }
 
         private void MainBorder_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -39,14 +39,14 @@ namespace HospitalRegistration.Windows
 
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            if (NullObjectsValidator.Validate(
+            if (!NullObjectsValidator.Validate(
                 TbEmail.Text,
                 TbFirstName.Text,
                 TbLastName.Text,
                 TbPhone.Text,
                 TbInsurance.Text,
                 CbGender.Text,
-                TbBirthday.Text) || !DateTextboxValidator.Validate(TbBirthday.Text))
+                TbBirthday.Text) && !DateTextboxValidator.Validate(TbBirthday.Text))
             {
                 MessageBox.Show("Ошибка входных данных!");
                 return;
@@ -55,7 +55,7 @@ namespace HospitalRegistration.Windows
             currentUser.email = TbEmail.Text;
             currentUser.firstName = TbFirstName.Text;
             currentUser.lastName = TbLastName.Text;
-            currentUser.middleName = NullObjectsValidator.Validate(TbMiddleName.Text) ? null : TbMiddleName.Text;
+            currentUser.middleName = NullObjectsValidator.Validate(TbMiddleName.Text) ? TbMiddleName.Text : null;
             currentUser.phone = TbPhone.Text;
             currentUser.insuranceNumber = TbInsurance.Text;
             currentUser.idGender = CbGender.Text == "М" ? 1 : 2;

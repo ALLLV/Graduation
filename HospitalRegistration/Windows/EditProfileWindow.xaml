@@ -145,7 +145,6 @@
                                     Width="100" MaxLength="11"
                                  FontSize="18"
                                  x:Name="TbBirthday">
-                            12.12.2000
                         </TextBox>
 
                     </StackPanel>

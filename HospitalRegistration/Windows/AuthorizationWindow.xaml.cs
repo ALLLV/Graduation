@@ -16,6 +16,8 @@ namespace HospitalRegistration
     {
         public AuthorizationWindow()
         {
+            DbConnectionHelper.InitializeConnection();
+
             InitializeComponent();
         }
 

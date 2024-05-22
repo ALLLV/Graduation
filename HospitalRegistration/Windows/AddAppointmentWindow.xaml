@@ -1,0 +1,114 @@
+﻿<Window x:Class="HospitalRegistration.Windows.AddAppointmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HospitalRegistration.Windows"
+        mc:Ignorable="d"
+        
+        Title="Добавление записи"
+        Height="500" Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Border
+        x:Name="MainBorder"
+        MouseDown="MainBorder_MouseDown"
+        CornerRadius="10">
+
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#2f41cc" Offset="0.1"/>
+                <GradientStop Color="#4959cc" Offset="0.3"/>
+                <GradientStop Color="#505dbf" Offset="0.9"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+
+            <Border
+            Background="White"
+            Width="500"
+            Height="400"
+            CornerRadius="10">
+
+                <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+                    <TextBlock  FontSize="18">
+            Дата записи:
+                    </TextBlock>
+
+                    <TextBox
+                    Style="{StaticResource mainTextbox}"
+                x:Name="TbDate"
+                MaxLength="64"
+                Margin="5">
+                12.12.2000 12:00
+                    </TextBox>
+
+                    <TextBlock  FontSize="18">
+            Врач:
+                    </TextBlock>
+
+                    <ComboBox
+                    Style="{StaticResource mainCombobox}"
+                x:Name="CbDoctor"
+                        Width="200"
+                Margin="5">
+
+                    </ComboBox>
+
+                    <TextBlock  FontSize="18">
+            Услуга:
+                    </TextBlock>
+
+                    <ComboBox
+                    Style="{StaticResource mainCombobox}"
+                x:Name="CbService"
+                Width="200"
+                Margin="5">
+
+                    </ComboBox>
+
+                    <StackPanel
+                Orientation="Horizontal"
+                Margin="10"
+                HorizontalAlignment="Center">
+
+                    </StackPanel>
+
+                    <StackPanel
+                Orientation="Horizontal"
+                Margin="10">
+
+                        <Button
+                         Style="{StaticResource mainButton}"
+                    x:Name="BtnAdd"
+                    Content="Добавить запись"
+                    Margin="2" 
+                    Click="BtnAdd_Click"
+                        FontSize="16">
+
+                        </Button>
+
+                        <Button
+                         Style="{StaticResource mainButton}"
+                    x:Name="BtnGoBack"
+                    Content="Назад"
+                    Margin="2" Click="BtnGoBack_Click"
+                        FontSize="16">
+
+                        </Button>
+                    </StackPanel>
+
+
+                </StackPanel>
+
+            </Border>
+        </Grid>
+
+    </Border>
+</Window>

@@ -56,7 +56,7 @@ namespace HospitalRegistration.Windows
 
         private void BtnRegistration_Click(object sender, RoutedEventArgs e)
         {
-            if (NullObjectsValidator.Validate(
+            if (!NullObjectsValidator.Validate(
                 TbEmail.Text, 
                 TbFirstName.Text, 
                 TbLastName.Text, 
@@ -64,7 +64,7 @@ namespace HospitalRegistration.Windows
                 TbInsurance.Text,
                 eyeFocused ? TbPassword.Text : PbPassword.Password,
                 CbGender.Text,
-                TbBirthday.Text) || !DateTextboxValidator.Validate(TbBirthday.Text))
+                TbBirthday.Text) && !DateTextboxValidator.Validate(TbBirthday.Text))
             {
                 MessageBox.Show("Ошибка входных данных!");
                 return;
@@ -76,14 +76,14 @@ namespace HospitalRegistration.Windows
                 password = eyeFocused ? TbPassword.Text : PbPassword.Password,
                 firstName = TbFirstName.Text,
                 lastName = TbLastName.Text,
-                middleName = NullObjectsValidator.Validate(TbMiddleName.Text) ? null : TbMiddleName.Text,
+                middleName = NullObjectsValidator.Validate(TbMiddleName.Text) ? TbMiddleName.Text : null,
                 phone = TbPhone.Text,
                 insuranceNumber = TbInsurance.Text,
                 idGender = CbGender.Text == "М" ? 1 : 2,
                 birthday = Convert.ToDateTime(TbBirthday.Text)
             };
 
-            if (DbConnectionHelper.Instance.DbContext.User.Contains(newUser))
+            if (DbConnectionHelper.Instance.DbContext.User.Any(x => x.email == newUser.email))
             {
                 MessageBox.Show($"При создании пользователя произошла ошибка, " +
                     $"пользователь с такими данными уже существует!");

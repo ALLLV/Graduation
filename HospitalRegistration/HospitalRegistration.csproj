@@ -141,14 +141,17 @@
     <Compile Include="Helpers\WindowNavigationHelper.cs" />
     <Compile Include="Validators\DateTextboxValidator.cs" />
     <Compile Include="Validators\NullObjectsValidator.cs" />
-    <Compile Include="Windows\AppointmentsWindow.xaml.cs">
-      <DependentUpon>AppointmentsWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AddAppointmentWindow.xaml.cs">
+      <DependentUpon>AddAppointmentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DbConnectionHelper.cs" />
     <Compile Include="Validators\DigitTextboxValidator.cs" />
+    <Compile Include="Windows\ChangeAppointmentWindow.xaml.cs">
+      <DependentUpon>ChangeAppointmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditProfileWindow.xaml.cs">
       <DependentUpon>EditProfileWindow.xaml</DependentUpon>
     </Compile>
@@ -197,11 +200,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Windows\AppointmentsWindow.xaml">
+    <Page Include="Windows\AddAppointmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChangeAppointmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +226,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\visibility.png" />
+    <Resource Include="Media\visibility_off.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DbModel\DbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DbModel.edmx</DependentUpon>
@@ -229,8 +240,6 @@
       <DependentUpon>DbModel.edmx</DependentUpon>
       <LastGenOutput>DbModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Media\visibility.png" />
-    <Resource Include="Media\visibility_off.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

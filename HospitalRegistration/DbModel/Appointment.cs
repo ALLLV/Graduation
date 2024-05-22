@@ -14,21 +14,15 @@ namespace HospitalRegistration.DbModel
     
     public partial class Appointment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Appointment()
-        {
-            this.Service = new HashSet<Service>();
-        }
-    
         public int id { get; set; }
         public int idUser { get; set; }
+        public int idService { get; set; }
         public int idDoctor { get; set; }
         public System.DateTime appointmentDate { get; set; }
         public bool isActive { get; set; }
     
         public virtual Doctor Doctor { get; set; }
+        public virtual Service Service { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Service> Service { get; set; }
     }
 }

@@ -11,6 +11,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idService" Type="int" Nullable="false" />
           <Property Name="idDoctor" Type="int" Nullable="false" />
           <Property Name="appointmentDate" Type="datetime" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
@@ -50,14 +51,6 @@
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
-        <EntityType Name="ServiceAppointment">
-          <Key>
-            <PropertyRef Name="idService" />
-            <PropertyRef Name="idAppointment" />
-          </Key>
-          <Property Name="idService" Type="int" Nullable="false" />
-          <Property Name="idAppointment" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Specialization">
           <Key>
             <PropertyRef Name="id" />
@@ -91,7 +84,7 @@
           <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Appointme__idDoc__440B1D61">
+        <Association Name="FK__Appointme__idDoc__44FF419A">
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
           <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -100,6 +93,18 @@
             </Principal>
             <Dependent Role="Appointment">
               <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__idSer__440B1D61">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="idService" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -127,7 +132,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DoctorSpe__idDoc__46E78A0C">
+        <Association Name="FK__DoctorSpe__idDoc__47DBAE45">
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
           <End Role="DoctorSpecialization" Type="Self.DoctorSpecialization" Multiplicity="*" />
           <ReferentialConstraint>
@@ -139,7 +144,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DoctorSpe__idSpe__47DBAE45">
+        <Association Name="FK__DoctorSpe__idSpe__48CFD27E">
           <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
           <End Role="DoctorSpecialization" Type="Self.DoctorSpecialization" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,30 +153,6 @@
             </Principal>
             <Dependent Role="DoctorSpecialization">
               <PropertyRef Name="idSpecialization" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ServiceAp__idApp__4BAC3F29">
-          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
-          <End Role="ServiceAppointment" Type="Self.ServiceAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Appointment">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ServiceAppointment">
-              <PropertyRef Name="idAppointment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ServiceAp__idSer__4AB81AF0">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="ServiceAppointment" Type="Self.ServiceAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ServiceAppointment">
-              <PropertyRef Name="idService" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -224,12 +205,15 @@
           <EntitySet Name="DoctorSpecialization" EntityType="Self.DoctorSpecialization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ServiceAppointment" EntityType="Self.ServiceAppointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Appointme__idDoc__440B1D61" Association="Self.FK__Appointme__idDoc__440B1D61">
+          <AssociationSet Name="FK__Appointme__idDoc__44FF419A" Association="Self.FK__Appointme__idDoc__44FF419A">
             <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__idSer__440B1D61" Association="Self.FK__Appointme__idSer__440B1D61">
+            <End Role="Service" EntitySet="Service" />
             <End Role="Appointment" EntitySet="Appointment" />
           </AssociationSet>
           <AssociationSet Name="FK__Appointme__idUse__4316F928" Association="Self.FK__Appointme__idUse__4316F928">
@@ -240,21 +224,13 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Doctor" EntitySet="Doctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__DoctorSpe__idDoc__46E78A0C" Association="Self.FK__DoctorSpe__idDoc__46E78A0C">
+          <AssociationSet Name="FK__DoctorSpe__idDoc__47DBAE45" Association="Self.FK__DoctorSpe__idDoc__47DBAE45">
             <End Role="Doctor" EntitySet="Doctor" />
             <End Role="DoctorSpecialization" EntitySet="DoctorSpecialization" />
           </AssociationSet>
-          <AssociationSet Name="FK__DoctorSpe__idSpe__47DBAE45" Association="Self.FK__DoctorSpe__idSpe__47DBAE45">
+          <AssociationSet Name="FK__DoctorSpe__idSpe__48CFD27E" Association="Self.FK__DoctorSpe__idSpe__48CFD27E">
             <End Role="Specialization" EntitySet="Specialization" />
             <End Role="DoctorSpecialization" EntitySet="DoctorSpecialization" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServiceAp__idApp__4BAC3F29" Association="Self.FK__ServiceAp__idApp__4BAC3F29">
-            <End Role="Appointment" EntitySet="Appointment" />
-            <End Role="ServiceAppointment" EntitySet="ServiceAppointment" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServiceAp__idSer__4AB81AF0" Association="Self.FK__ServiceAp__idSer__4AB81AF0">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="ServiceAppointment" EntitySet="ServiceAppointment" />
           </AssociationSet>
           <AssociationSet Name="FK__User__idGender__398D8EEE" Association="Self.FK__User__idGender__398D8EEE">
             <End Role="Gender" EntitySet="Gender" />
@@ -272,12 +248,13 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idService" Type="Int32" Nullable="false" />
           <Property Name="idDoctor" Type="Int32" Nullable="false" />
           <Property Name="appointmentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Doctor" Relationship="Self.FK__Appointme__idDoc__440B1D61" FromRole="Appointment" ToRole="Doctor" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK__Appointme__idDoc__44FF419A" FromRole="Appointment" ToRole="Doctor" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Appointme__idSer__440B1D61" FromRole="Appointment" ToRole="Service" />
           <NavigationProperty Name="User" Relationship="Self.FK__Appointme__idUse__4316F928" FromRole="Appointment" ToRole="User" />
-          <NavigationProperty Name="Service" Relationship="Self.ServiceAppointment" FromRole="Appointment" ToRole="Service" />
         </EntityType>
         <EntityType Name="Doctor">
           <Key>
@@ -290,7 +267,7 @@
           <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__idDoc__440B1D61" FromRole="Doctor" ToRole="Appointment" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__idDoc__44FF419A" FromRole="Doctor" ToRole="Appointment" />
           <NavigationProperty Name="Gender" Relationship="Self.FK__Doctor__idGender__403A8C7D" FromRole="Doctor" ToRole="Gender" />
           <NavigationProperty Name="Specialization" Relationship="Self.DoctorSpecialization" FromRole="Doctor" ToRole="Specialization" />
         </EntityType>
@@ -310,7 +287,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Appointment" Relationship="Self.ServiceAppointment" FromRole="Service" ToRole="Appointment" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__idSer__440B1D61" FromRole="Service" ToRole="Appointment" />
         </EntityType>
         <EntityType Name="Specialization">
           <Key>
@@ -348,7 +325,7 @@
           <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__idUse__4316F928" FromRole="User" ToRole="Appointment" />
           <NavigationProperty Name="Gender" Relationship="Self.FK__User__idGender__398D8EEE" FromRole="User" ToRole="Gender" />
         </EntityType>
-        <Association Name="FK__Appointme__idDoc__440B1D61">
+        <Association Name="FK__Appointme__idDoc__44FF419A">
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
           <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -357,6 +334,18 @@
             </Principal>
             <Dependent Role="Appointment">
               <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__idSer__440B1D61">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="idService" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -400,10 +389,6 @@
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
           <End Role="Specialization" Type="Self.Specialization" Multiplicity="*" />
         </Association>
-        <Association Name="ServiceAppointment">
-          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
-          <End Role="Service" Type="Self.Service" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Appointment" EntityType="Self.Appointment" />
           <EntitySet Name="Doctor" EntityType="Self.Doctor" />
@@ -412,8 +397,12 @@
           <EntitySet Name="Specialization" EntityType="Self.Specialization" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK__Appointme__idDoc__440B1D61" Association="Self.FK__Appointme__idDoc__440B1D61">
+          <AssociationSet Name="FK__Appointme__idDoc__44FF419A" Association="Self.FK__Appointme__idDoc__44FF419A">
             <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__idSer__440B1D61" Association="Self.FK__Appointme__idSer__440B1D61">
+            <End Role="Service" EntitySet="Service" />
             <End Role="Appointment" EntitySet="Appointment" />
           </AssociationSet>
           <AssociationSet Name="FK__Appointme__idUse__4316F928" Association="Self.FK__Appointme__idUse__4316F928">
@@ -431,10 +420,6 @@
           <AssociationSet Name="DoctorSpecialization" Association="Self.DoctorSpecialization">
             <End Role="Doctor" EntitySet="Doctor" />
             <End Role="Specialization" EntitySet="Specialization" />
-          </AssociationSet>
-          <AssociationSet Name="ServiceAppointment" Association="Self.ServiceAppointment">
-            <End Role="Appointment" EntitySet="Appointment" />
-            <End Role="Service" EntitySet="Service" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -489,6 +474,7 @@
               <MappingFragment StoreEntitySet="Appointment">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idService" ColumnName="idService" />
                 <ScalarProperty Name="idDoctor" ColumnName="idDoctor" />
                 <ScalarProperty Name="appointmentDate" ColumnName="appointmentDate" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
@@ -567,14 +553,6 @@
             </EndProperty>
             <EndProperty Name="Specialization">
               <ScalarProperty Name="id" ColumnName="idSpecialization" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="ServiceAppointment" TypeName="DbModel.ServiceAppointment" StoreEntitySet="ServiceAppointment">
-            <EndProperty Name="Appointment">
-              <ScalarProperty Name="id" ColumnName="idAppointment" />
-            </EndProperty>
-            <EndProperty Name="Service">
-              <ScalarProperty Name="id" ColumnName="idService" />
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище DbModel.sp_alterdiagram" />
