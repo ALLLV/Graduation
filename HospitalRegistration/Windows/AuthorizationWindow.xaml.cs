@@ -77,7 +77,10 @@ namespace HospitalRegistration
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var result = MessageBox.Show("Точно выйти?", "Подтвердите действие", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+                this.Close();
         }
     }
 }

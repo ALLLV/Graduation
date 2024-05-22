@@ -23,7 +23,7 @@ namespace HospitalRegistration.Windows
 
             ObservableCollection<AppointmentDto> appointments = new ObservableCollection<AppointmentDto>();
 
-            foreach (var appointmentFromDb in currentUser.Appointment)
+            foreach (var appointmentFromDb in currentUser.Appointment.Where(x => x.isActive = true))
             {
                 appointments.Add(new AppointmentDto(appointmentFromDb));
             }
@@ -57,7 +57,10 @@ namespace HospitalRegistration.Windows
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var result = MessageBox.Show("Точно выйти?", "Подтвердите действие", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+                this.Close();
         }
 
         private void BtnAddRow_Click(object sender, RoutedEventArgs e)

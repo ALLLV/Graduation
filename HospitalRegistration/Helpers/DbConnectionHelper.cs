@@ -1,5 +1,4 @@
 ﻿using HospitalRegistration.DbModel;
-using System.Data.Common;
 
 namespace HospitalRegistration.Helpers
 {

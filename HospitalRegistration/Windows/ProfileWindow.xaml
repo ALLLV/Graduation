@@ -108,9 +108,21 @@
 
                                 <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Width="*" Header="Дата записи" Binding="{Binding AppointmentDate}"/>
 
-                                <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Width="*" Header="Врач" Binding="{Binding Doctor}"/>
+                                <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Width="*" Header="Врач" Binding="{Binding Doctor}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
 
-                                <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Width="*" Header="Услуги" Binding="{Binding Services}"/>
+                                <DataGridTextColumn IsReadOnly="True" CanUserResize="False" Width="*" Header="Услуги" Binding="{Binding Service.name}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
 
                             </DataGrid.Columns>
                         </DataGrid>

@@ -76,14 +76,19 @@ namespace HospitalRegistration.Windows
                     return;
 
                 if (DbConnectionHelper.Instance.DbContext.Appointment
-                    .FirstOrDefault(x => x.appointmentDate == appointment.appointmentDate) == null)
-                    DbConnectionHelper.Instance.DbContext.Appointment.Add(appointment);
+                    .Any(x => x.appointmentDate == appointment.appointmentDate))
+                    throw new ArgumentException("На эту дату уже существует запись на услугу!");
 
+                DbConnectionHelper.Instance.DbContext.Appointment.Add(appointment);
                 DbConnectionHelper.Instance.DbContext.SaveChanges();
 
                 MessageBox.Show("Запись успешно создана!");
 
                 WindowNavigationHelper.Navigate(this, new ProfileWindow(currentUser));
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch
             {
